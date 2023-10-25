@@ -1,0 +1,38 @@
+{% load static %}
+<html>
+<head>
+    <title>
+        {% for genre in book_genre %}
+            {{ genre.name }}
+        {% endfor %}
+    </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="{% url 'books:index' %}">Главная</a></li>
+            <li><a href="{% url 'users:login' %}">Войти</a></li>
+            <li><a href="{% url 'users:registration' %}">Регистрация</a></li>
+            <li><a href="{% url 'users:profile' %}">Личный кабинет</a></li>
+            <li><a href="{% url 'admin:index' %}">Админ-панель</a></li>
+        </ul>
+    </nav>
+</header>
+<div class="book-list">
+    {% for book in book_list %}
+        <div class="book-item">
+            <p><img src="{{ media }}{{ book.image.url }}"></p>
+            <p><h3>{{ book.name }}</h3></p>
+            <p>Цена: {{ book.price }} руб.</p>
+            <p><a href="{% url 'books:book' book.id %}">Информация о книге</a></p>
+            <p><a href="{% url 'books:basket_add' book.id %}"><button>Добавить в корзину</button></a></p>
+        </div>
+    {% endfor %}
+</div>
+<footer>
+    <p>&copy; Bookstore 2023</p>
+</footer>
+</body>
+</html>

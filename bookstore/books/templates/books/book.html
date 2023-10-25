@@ -1,0 +1,32 @@
+{% load static %}
+<html>
+<head>
+    <title>{{ book.name }}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="{% url 'books:index' %}">Главная</a></li>
+            <li><a href="{% url 'users:login' %}">Войти</a></li>
+            <li><a href="{% url 'users:registration' %}">Регистрация</a></li>
+            <li><a href="{% url 'users:profile' %}">Личный кабинет</a></li>
+            <li><a href="{% url 'admin:index' %}">Админ-панель</a></li>
+        </ul>
+    </nav>
+</header>
+<div class="book-info">
+    <h1>{{ book.name }}</h1>
+    <p>{{ book.description }}</p>
+    <p>Цена: {{ book.price }}</p>
+    <p>Автор: {{ book.author }}</p>
+    <img src="{{ media }}{{ book.image.url }}">
+    <p>Жанр: {{ book.genre }}</p>
+    <p><a href="{% url 'books:basket_add' book.id %}"><button>Добавить в корзину</button></a></p>
+</div>
+<footer>
+    <p>&copy; Bookstore 2023</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,49 @@
+{% load static %}
+<html>
+<head>
+    <title>{{ title }}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="{% url 'books:index' %}">Главная</a></li>
+            <li><a href="{% url 'users:logout' %}">Выйти</a></li>
+        </ul>
+    </nav>
+</header>
+<div class="profile">
+    <h3>Ваш профиль</h3>
+    <section>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <img src="{{ form.instance.image.url }}">
+            {{ form.as_p }}
+            <input type="submit" value="Сохранить">
+        </form>
+    </section>
+    <section>
+        <h3>Корзина товаров</h3>
+        {% if basket %}
+            <ul>
+                {% for basket_item in basket %}
+                    <li>{{ basket_item.book.name }}</li>
+                    <li>{{ basket_item.quantity }}</li>
+                    <li>{{ basket_item.sum }}</li>
+                    <li><a href="{% url 'books:basket_remove' basket_item.id %}">Удалить товар из корзины</a></li>
+                {% endfor %}
+                <li>Итоговая сумма: {{ total_sum }}</li>
+                <li>Количество добавленных товаров: {{ total_quantity }}</li>
+                <li><button>Оформить заказ</button></li>
+            </ul>
+        {% else %}
+            Корзина пуста
+        {% endif %}
+    </section>
+</div>
+<footer>
+    <p>&copy; Bookstore 2023</p>
+</footer>
+</body>
+</html>
