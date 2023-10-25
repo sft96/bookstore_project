@@ -21,11 +21,11 @@
 - Клонировать репозиторий
 
 ```bash
-git clone https://github.com/ShreddedCode/bookstore.git
+git clone https://github.com/sft96/bookstore_project.git
 ```
 - Перейдите в нужный каталог
 ```bash
-cd bookstore
+cd bookstore_project
 ```
 - Установить виртуальную среду
 ```bash
